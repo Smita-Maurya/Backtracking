@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+ll subsetSum(ll arr[], ll n, ll k)
+{
+    if (0 == n)
+    {
+        if (k == 0)
+            return 1;
+        return 0;
+    }
+    int count = subsetSum(arr+1, n-1, k - arr[0]);
+    count += subsetSum(arr+1, n-1, k);
+    return count;
+}
+
+// Driver code
+int main()
+{
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        ll n, k;
+        cin >> n >> k;
+        ll arr[n];
+        for (ll i = 0; i < n; i++)
+            cin >> arr[i];
+        if (n == 0)
+            cout << endl;
+        else
+            cout << subsetSum(arr, n, k) << endl;
+    }
+    return 0;
+}
